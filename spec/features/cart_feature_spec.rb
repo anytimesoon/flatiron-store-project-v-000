@@ -50,8 +50,9 @@ describe 'Feature Test: Cart', :type => :feature do
      it "sets current_cart to nil on checkout" do
        visit cart_path(@user.current_cart)
        click_button("Checkout")
-
+       # binding.pry
        @user.reload
+       # binding.pry
        expect(@user.current_cart).to be_nil 
      end
     end
@@ -87,6 +88,7 @@ describe 'Feature Test: Cart', :type => :feature do
         @user.current_cart = nil
         @user.save
         visit store_path
+        # binding.pry
         within("form[action='#{line_items_path(item_id: first_item)}']") do
           click_button("Add to Cart")
         end
